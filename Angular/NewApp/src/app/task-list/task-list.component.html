@@ -1,0 +1,70 @@
+<div class="search">
+  <a routerLink="/task" routerLinkActive="active">
+    <button>Task</button>
+  </a>
+  <a routerLink="/categorie" routerLinkActive="active">
+    <button>Categorie</button>
+  </a>
+
+</div>
+<div class="grid">
+  <div class="grid-container">
+    <table>
+      <thead>
+        <tr class="header">
+          <th>Task ID<div (click)="SortbyDate()">Task ID</div></th>
+          <th>Text<div (click)="SortbyText()">Text</div></th>
+          <th>Completed<div>Completed</div></th>
+          <th>Action<div>Action</div></th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of listofTask; let i = index">
+          <td>{{getIDKeys(i)}}</td>
+          <td>{{getTextkeys(i)}}</td>
+          <td>{{getTaskCompletion(i)}}</td>
+          <td><button (click)="updateTask(getIDKeys(i),i,getTextkeys(i) )">Edit</button> <button (click)="deleteTask(getIDKeys(i))">delete</button><button (click)="updateTaskComplete(getIDKeys(i),getTaskCompletion(i),i )" >completed</button></td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="grid" style="margin-top: 50px;">
+  <h2>create New Task</h2>
+  <div class="NewTask">
+    <label>Task Name</label>
+    <input type="text" [(ngModel)]="taskText" placeholder="Text" />
+
+    <label>Task Completetion</label>
+    <select [(ngModel)]="taskComplete" id="completed" value=false>
+      <option value=true selected>True</option>
+      <option value=false>False</option>
+    </select>
+
+    <button (click)="createNewTask()">submit</button>
+  </div>
+</div>
+
+<div *ngIf="updateTaskBool==true; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+  <div ng-hide="updateTaskBool == false" class="grid" style="margin-top: 50px;" >
+    <h2>Update Task Name</h2>
+    <label>{{upadateTaskID}}</label><br>
+    <div class="NewTask">
+      <label>New Task Name</label>
+      <input type="text" [(ngModel)]="upadateText" placeholder="Text" />
+
+      <button (click)="submitupdateTask()">submit</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #elseBlock>
+  <div ng-hide="updateTaskBool == false" class="grid" style="margin-top: 50px;" >
+    <h2>please Select at least one task to be edited</h2>
+  </div>
+</ng-template>
+

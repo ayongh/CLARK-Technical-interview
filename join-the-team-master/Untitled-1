@@ -1,0 +1,41 @@
+var id = req.params.id;
+  var data  = null
+
+  MongoDriverFactory.build().then(async (datastore) => {
+    datastore.readTask(id).then(function(result){
+    res.send(result)
+
+  }).catch(e => {
+    res.send(e)
+  });
+
+  })
+
+  var a = await this.categories.findOne({ _id: new ObjectID(categoryId) });
+    var DBlist = a.tasks
+    
+    
+    for(var i = 1; i < taskList.length; i++)
+    {
+      for(var j = 1; j<DBlist.length; j++)
+      {
+        if ( DBlist[j] == taskList[i]) DBlist.splice(j, 1);
+      }
+    }
+    
+    await this.categories.updateOne({ _id: new ObjectID(categoryId) }, { $push: { tasks: { $each: DBlist.map(DBlist => new ObjectID(DBlist)) } } });
+
+
+ var a = await this.categories.findOne({ _id: new ObjectID(categoryId) });
+    var DBlist = a.tasks
+    
+    
+    for(var i = 1; i < taskList.length; i++)
+    {
+      for(var j = 1; j<DBlist.length; j++)
+      {
+        if ( DBlist[j] == taskList[i]) DBlist.splice(j, 1);
+      }
+    }
+    
+    console.log(DBlist)

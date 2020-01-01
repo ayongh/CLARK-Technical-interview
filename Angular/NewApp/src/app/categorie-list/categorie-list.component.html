@@ -1,0 +1,109 @@
+<div class="search">
+    <a routerLink="/task" routerLinkActive="active">
+        <button>Task</button>
+      </a>
+      <a routerLink="/categorie" routerLinkActive="active">
+        <button>Categorie</button>
+      </a>
+    <input class="searchInput" type="text" [(ngModel)]="categorieSearch" (change)="lookupCateg()" placeholder="Text" /><br>
+    <button (click)="getallCateg()">get All Categorie</button>
+</div>
+
+<div class="grid">
+    <div class="grid-container">
+        <table>
+        <thead>
+            <tr class="header">
+                <th>Categorie ID<div (click)="SortbyDate()">Categorie ID</div></th>
+                <th>Name<div (click)="SortbyText()">Name</div></th>
+                <th>Action<div>Action</div></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let categer of categList; async as categ; let i = index">
+                <td>{{categer._id}}</td>
+                <td>{{categer.name}}</td>
+                <td><button (click)="moreInfo(categer._id,i,categer.name)" >More Info</button></td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="categFlag==true; then thenBlock else elseBlock"></div>
+
+<ng-template #thenBlock>
+    <div class="grid">
+        <div class="grid-container">
+            <div class="info">
+                <h2>Categorie Information</h2><br>
+                <label>ID : {{categorieId}}</label><br>
+                <label>Name : {{categorieName}}</label><br>
+                <label>Task List</label><br>
+
+                <ul *ngFor="let task of categorieTask; let i = index">
+                    <li>{{task}}</li>
+                    <button (click)="deletTask(categorieId,i,task,categorieName)">delete</button>
+                </ul>
+            </div>
+
+            <button (click)="deleteCateg()">Delete Categorie</button>
+        </div>
+    </div>
+
+
+<div class="grid">
+    <div class="grid-container">
+        <div class="info">
+            <h2>Update Value</h2>
+            <label>updating value of name</label><br>
+            <input type="text" [(ngModel)]="categorieName" placeholder="Text" /><br>
+            <button (click)="updateName()">Update</button>
+        </div>            
+    </div>
+</div>
+
+<div class="grid">
+    <div class="grid-container">
+        <div class="info">
+            <h2>Add Task</h2>
+            <label>Add Task</label><br>
+            <input type="text" [(ngModel)]="addTaskID" placeholder="Text" />
+            <button (click)="searchTask()">Add</button>
+            <br>
+            <label>{{taskSearchRes}}</label><br>
+            <label>list of task to be added</label>
+            <ul *ngFor="let task of listofTask; let i = index">
+                <li>{{task}}</li>
+                <button (click)="removetaskfromList(i)">remove</button>
+            </ul><br>
+
+            <button (click)="addTaskToCategorie()" >Submit</button>
+        </div>            
+    </div>
+</div>
+
+</ng-template>
+
+<ng-template #elseBlock>
+    <div class="grid">
+        <div class="grid-container">
+            <div class="info">
+                <h2>Please select at least one categorie</h2>
+            </div>            
+        </div>
+    </div>
+</ng-template>
+
+
+<div class="grid">
+    <div class="grid-container">
+        <div class="info">
+            <h2>Create Categorie</h2>
+            <label>updating value of name</label><br>
+            <input type="text" [(ngModel)]="createcategorieName" placeholder="Text" /><br>
+            <button (click)="createCategorie()">Create</button>
+        </div>            
+    </div>
+</div>
