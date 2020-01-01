@@ -19,5 +19,6 @@ Node contains server-side source code
 Make sure your database is running as well 
 -	use the setup mentioned in the https://github.com/Cyber4All/join-the-team
 
-Also there is one extra file containing collection of postman test cases. you can simply import in postman and run to test the API.
+Also there is one extra file containing collection of postman test cases. you can simply import this file in postman and run to test the API.
+- File Name : Task Copy.postman_collection.json
 
